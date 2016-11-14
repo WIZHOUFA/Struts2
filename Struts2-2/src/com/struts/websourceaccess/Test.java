@@ -1,0 +1,45 @@
+package com.struts.websourceaccess;
+
+import java.util.Map;
+
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.ApplicationAware;
+import org.apache.struts2.interceptor.SessionAware;
+
+public class Test implements SessionAware,ApplicationAware{
+	private Map<String,Object> session;
+	private Map<String,Object> application;
+	private String username;
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session=session;
+	}
+
+	public void setApplication(Map<String, Object> application) {
+		// TODO Auto-generated method stub
+		this.application=application;
+	}
+	public String login(){
+		session.put("username",username);
+		Integer count=(Integer)(application.get("personOnline")==null?0:application.get("personOnline"));
+		if(count!=null)
+			count++;
+		application.put("personOnline",count);
+		return "login";
+	}
+	public String logout(){
+		if(session instanceof SessionMap){
+			SessionMap sm=(SessionMap)session;
+		    sm.invalidate();
+		    Integer count=(Integer)(application.get("personOnline")==null?0:application.get("personOnline"));
+			if(count!=null)
+				count--;
+			application.put("personOnline",count);
+			}
+		return "logout";
+	}
+}

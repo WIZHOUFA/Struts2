@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+      <!-- name属性随意取名，extends属性是必须的，一般继承struts-default,用于调用struts中的值栈，过滤器等
+        namespace并非必须，默认为"/"表示当前WEB工程目录，若添加路径则在访问时需要添加
+       -->
+      <package name="websource" extends="struts-default">
+      <!-- action 代表一个struts请求，
+            name属性为去除后缀的请求URL，
+            class为Action类，用于处理请求，默认为 com.opensymphony.xworks.ActionSupport,
+            method属性表示处理请求的方法名称，在Action类中定义该方法
+            -->
+      <action name="test" class="com.struts.websourceaccess.TestAccessWebsource">
+      <!-- result表示处理请求的结果，name默认为"success",为方法返回值，type表示到达目标URL的类型默认为dispatcher(请求准发) -->
+         <result>/index.jsp</result>
+      </action>
+      <action name="User_login" class="com.struts.websourceaccess.Test" method="login">
+      <result name="login">/loginInfo.jsp</result>
+      </action>
+      <action name="User_logout" class="com.struts.websourceaccess.Test" method="logout">
+      <result name="logout">/Login_Ui.jsp</result>
+      </action>
+      </package>
+</struts>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+       <constant name="struts.custom.i18n.resources" value="i18n"></constant>
+       <package name="default" extends="struts-default">
+         <interceptors>
+            <interceptor-stack name="myinterceptors">
+               <interceptor-ref name="defaultStack">
+                 <param name="fileUpload.maxinumSize">2048</param>
+                 <param name="fileUpload.allowedTypes">text/xml,text/html</param>
+                 <param name="fileUpload.allowedExtensions">xml,dtd,html</param>
+               </interceptor-ref>
+            </interceptor-stack>
+         </interceptors>
+         <default-interceptor-ref name="myinterceptors"></default-interceptor-ref>
+         <action name="fileUpload" class="com.struts.fileupload.FileUpload">
+         <result>/success.jsp</result>
+         <result name="input">/index.jsp</result>
+         </action>
+         <action name="testFileDownload" class="com.struts.download.FileDownload">
+         <result type="stream">
+         <param name="bufferSize">2048</param>
+         </result>
+         </action>
+         <action name="testToken" class="com.struts.token.TokenAction">
+         <interceptor-ref name="tokenSession"></interceptor-ref>
+         <interceptor-ref name="defaultStack"></interceptor-ref>
+         <result>success.jsp</result>
+         <result name="invalid.token">testToken.jsp</result>
+         </action>
+       </package>
+
+</struts>

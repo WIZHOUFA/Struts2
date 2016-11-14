@@ -1,0 +1,35 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="idcard">
+    <field-validator type="idcard">
+      <message>错误的身份证号</message>
+    </field-validator>
+    </field>
+    <field name="age">
+        <field-validator type="required">
+        <message>age不可未空</message>
+        </field-validator>
+        <field-validator type="conversion">
+            <message>类型转换错误</message>
+        </field-validator>
+        <field-validator type="int" short-circuit="true">
+            <param name="min">20</param>
+            <param name="max">40</param>
+            <message key="error.in"/>
+        </field-validator>
+    </field>
+    <field name="count">
+        <field-validator type="int">
+            <param name="min">10</param>
+            <param name="max">20</param>
+            <message key="error.in"/>
+        </field-validator>
+    </field>
+    <validator type="expression">
+       <param name="expression"><![CDATA[password1==password2]]></param>
+       <message>两次输入密码不一致</message>
+    </validator>
+</validators>
